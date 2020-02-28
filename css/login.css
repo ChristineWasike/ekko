@@ -1,0 +1,62 @@
+body {
+    font-family: 'Work Sans', sans-serif;
+    margin: auto;
+    padding: 1.5rem;
+    position: absolute;
+}
+
+#login-text {
+    color: #fcc700;
+}
+
+.container{
+    min-height: 100%;  
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.login-form {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    flex: 1 1 auto;
+    padding: 1rem;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-clip: padding-box;
+    border-radius: 1.1rem;
+    box-shadow: .1rem .2rem .2rem .1rem #888888;
+    outline: none;
+    min-width: 500px;
+}
+
+.txt-tfm {
+    text-transform: uppercase;
+}
+
+.my-btn{
+    border-radius: .6rem;
+    border-color: #16555A;
+    background-color: #16555A;
+}
+
+.my-btn:hover{
+    border-color: #16555A;
+    background-color: rgba(22, 85, 90, 0.884);
+}
+
+#account_p{
+    margin-bottom: 0em;
+}
+
+#create-link a{
+    color: #16555A;
+}
+
+#create-link a:hover{
+    text-decoration: none;
+    color: rgba(22, 85, 90, 0.829);
+}
