@@ -14,7 +14,7 @@
     <div class="container">
         <!-- Creating the login page -->
         <div class="row row-body">
-            <div class="col-md-6 col-lg-4 mx-auto">
+            <div class="col-md-6 mx-auto">
                 <div id="first">
                     <div class="login-form">
                         <div class="col-md-12 text-center">
