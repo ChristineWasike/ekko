@@ -22,7 +22,7 @@
                                 <h1 id="signup-text">SignUp</h1>
                             </div>
                         </div>
-                        <form action="" method="post" name="login">
+                        <form action="includes/process_user_registration.php" method="post" name="signup">
                             <div class="form-group">
                                 <label for="firstName">First Name</label>
                                 <input type="text" name="firstname" class="form-control" id="firstname" aria-describedby="firstName" placeholder="Enter first name">
@@ -30,7 +30,12 @@
 
                             <div class="form-group">
                                 <label for="lastName">Last Name</label>
-                                <input type="text" name="laststname" class="form-control" id="lastname" aria-describedby="lastName" placeholder="Enter last name">
+                                <input type="text" name="lastname" class="form-control" id="lastname" aria-describedby="lastName" placeholder="Enter last name">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lastName">User Name</label>
+                                <input type="text" name="username" class="form-control" id="username" aria-describedby="userName" placeholder="Enter user name">
                             </div>
 
                             <div class="form-group">
