@@ -19,13 +19,15 @@
                     <div class="login-form">
                         <div class="col-md-12 text-center">
                             <div class="logo">
-                                <h1 id="login-text">Login</h1>
+                                <h1>Welcome to Ekko</h1>
+                                <p>Kindly login here</p>
+                                <h2 id="login-text">Login</h2>
                             </div>
                         </div>
-                        <form action="" method="post" name="login">
+                        <form action="includes/login_validation.php" method="post" name="login">
                             <div class="form-group">
-                                <label for="emailAddress">Email Address</label>
-                                <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                                <label for="userName">User Name</label>
+                                <input type="text" name="username" class="form-control" id="text" aria-describedby="emailHelp" placeholder="Enter username">
                             </div>
 
                             <div class="form-group">
