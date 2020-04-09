@@ -5,5 +5,4 @@
 define("DATABASE_HOST", "localhost");
 define("DATABASE_USERNAME", "root");
 define("DATABASE_NAME", "ekko");
-define("DATABASE_PASSWORD", "")
-?>
+define("DATABASE_PASSWORD", "");

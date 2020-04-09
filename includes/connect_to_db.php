@@ -3,7 +3,7 @@
 include("constants.php");
 
 // Creating a function to connect to the database
-function connectToDatabse(){
+function connectToDatabase() {
     // Initializing the connection object
     $mysqli = new mysqli(DATABASE_HOST, DATABASE_USERNAME, DATABASE_PASSWORD, DATABASE_NAME);
 
@@ -23,6 +23,6 @@ function connectToDatabse(){
 }
 
 // Function to disconnect from the Database(A security measure)
-function disconnectFronmDatabse($mysqli){
-    $mysqli -> close();
+function disconnectFromDatabase($mysqli) {
+    $mysqli->close();
 }

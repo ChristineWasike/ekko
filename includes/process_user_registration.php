@@ -24,9 +24,10 @@ $username_not_in_use = $validate->verifyUsername($user_name);
 
 if ($username_not_in_use) {
     // Create a connection object
-    $mysqli = connectToDatabse();
+    $mysqli = connectToDatabase();
 
-    $query = "INSERT INTO users (username, firstname, lastname, password, email) VALUES ( '$user_name ', '$first_name ','$last_name','$hashed_password','$email')";
+    $query = "INSERT INTO users (username, firstname, lastname, password, email) VALUES ( 
+            '$user_name ', '$first_name ','$last_name','$hashed_password','$email')";
 
     // Execute query
     $result = $mysqli->query($query);
@@ -37,19 +38,19 @@ if ($username_not_in_use) {
         $action_page = "../login.php";
     } else {
         // Redirect them to the signup page and display an error message
-        $message = "Unable to create an account. Please try again.";
+        $message = "Unable to create an account. (L) Please try again.";
         $action_page = "../signup.php";
     }
 
 } else {
-    $message = "Unable to create account. Please try again. Your password maybe already in use.";
+    $message = "Unable to create account. (R) Please try again. Your password maybe already in use.";
     $action_page = "../signup.php";
 }
 
 // Redirect the user to as per the action page
-echo '<form name="user_redirect" id="user_redirect" method="POST"'
+echo '<form name = "user_redirect" id = "user_redirect" method = "POST"'
     . 'action="' . $action_page . '">'
-    . '<input type="text" name="message" value="' . $message . '" />'
+    . '<input type = "text" name = "message" style = "width = 700px" value = "' . $message . '" />'
     . '</form>';
 
 //create a script in Javascript to execute the form

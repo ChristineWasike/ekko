@@ -18,7 +18,8 @@ $action_page = "";
 // Creating a Validation constructor
 $validate = new Validation();
 
-$password_and_username_contained = $validate->verifyUsernameAndPassword($user_name, $hashed_password);
+$password_and_username_contained = $validate->verifyUsername($user_name);
+echo $password_and_username_contained;
 
 if ($password_and_username_contained) {
     $action_page = "../index.html";

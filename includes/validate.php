@@ -4,7 +4,7 @@ class Validation {
 
     public function verifyUsername($username) {
         // Create a connection instance
-        $mysqli = connectToDatabse();
+        $mysqli = connectToDatabase();
 
         $query = "SELECT username FROM users WHERE username='" . $username . "'";
 
@@ -21,7 +21,7 @@ class Validation {
 
     public function verifyUsernameAndPassword($username, $password) {
         // Create connection instance
-        $mysqli = connectToDatabse();
+        $mysqli = connectToDatabase();
         $hashed_password = md5($password);
 
         $query = "SELECT * FROM users WHERE username = '" . $username . "' AND password = '" . $hashed_password . "'";
