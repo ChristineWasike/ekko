@@ -11,11 +11,9 @@ class Validation {
         $result = $mysqli->query($query);
 
         if ($result->num_rows > 0) {
-            // This means that the username already exists. We return false to prevent the same user from signing up a
-            // second time.
-            return false;
-        } else {
             return true;
+        } else {
+            return false;
         }
     }
 

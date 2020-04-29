@@ -22,6 +22,7 @@ function connectToDatabase() {
     }
 }
 
+
 // Function to disconnect from the Database(A security measure)
 function disconnectFromDatabase($mysqli) {
     $mysqli->close();

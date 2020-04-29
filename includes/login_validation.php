@@ -22,7 +22,7 @@ $password_and_username_contained = $validate->verifyUsername($user_name);
 echo $password_and_username_contained;
 
 if ($password_and_username_contained) {
-    $action_page = "../index.html";
+    $action_page = "../index.php";
 } else {
     $message = "Sorry, your username or password are incorrect. Please try again";
     $action_page = "../login.php";
