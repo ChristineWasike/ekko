@@ -93,9 +93,10 @@
                         <div class="price mt-3 mb-5"><strong>$999</strong>
                             <del>$1,299</del>
                         </div>
-                        <p><a href="#" class="btn btn-outline-primary rounded-0">Shop Now</a> <a href="#"
-                                                                                                 class="btn btn-primary rounded-0">Shop
-                                Now</a></p>
+                        <p>
+                            <a href="#" class="btn btn-outline-primary rounded-0">Shop Now</a>
+                            <a href="#" class="btn btn-primary rounded-0">Shop Now</a>
+                        </p>
                     </div>
                 </div>
                 <!--                <div class="col-lg-7 align-self-end text-center text-lg-right">-->
@@ -110,33 +111,35 @@
 
     <div class="products-wrap border-top-0">
         <div class="container-fluid" id="items">
+            <?php
+            # Creating a section that fetches the customer's id upon logging in and using it during their session
+            # In the where a user clicks on the artifact, art piece or music product, they are prompted to
+            # log in first before they can proceed to add the item to cart.
+            require "classes/Customer.php";
+            $objCustomer = new Customer();
+            $objCustomer->setEmail('random.user@gmail.com');
+            # Getting the user email address to help start the session
+            $customer = $objCustomer->getCustomerByEmail();
+            session_start();
+            $_SESSION['`customer_id`'] = $customer['id'];
+            ?>
             <div class="row" style="text-align: center;">
-                <div class="alert  alert-dismissible" role="alert" style="display: flex">
+                <div class="alert alert-dismissible" role="alert" style="display: flex">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         x
                     </button>
                     <div id="result">
                         <div style="text-align: center;">
                             <img src="https://snoopgame.com/wp-content/uploads/2019/08/dots.gif"
-                                 id="loader" alt="loader gif" style="height: 50%; width: 50%;">
+                                 id="loader" alt="loader gif" style="height: 50%; width: 50%;  display: none;">
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row no-gutters products" >
+            <div class="row no-gutters products">
                 <?php
-                # Creating a section that fetches the customer's id upon logging in and using it during their session
-                # In the where a user clicks on the artifact, art piece or music product, they are prompted to
-                # log in first before they can proceed to add the item to cart.
-                require "classes/Customer.php";
-                $objCustomer = new Customer();
-                $objCustomer->setEmail("random.user@gmail.com");
-                # Getting the user email address to help start the session
-                $customer = $objCustomer->getCustomerByEmail();
-                session_start();
-                $_SESSION['customerId'] = $customer['id'];
-
                 require "classes/AllItems.php";
+
                 $objAllItems = new AllItems();
                 $allItems = $objAllItems->getAllItems();
 
@@ -379,14 +382,28 @@
 <script src="js/main.js"></script>
 
 <script type="text/javascript">
-    function addToCart(itemId) {
+    function addToCart(item_id) {
+        $('#loader').show();
         $.ajax({
             url: "action.php",
-            data: "itemId=" + itemId + "&action=add",
+            data: "item_id=" + item_id + "&action=add",
             method: "post"
         }).done(function (response) {
+            let data = JSON.parse(response);
+            $('#loader').hide();
             $('.alert').show();
-            $('#result').html(response);
+            if (data.status === 0) {
+                console.log("Something went wrong");
+                $('.alert').addClass('alert-danger');
+                $('#result').html(data.message);
+            } else {
+                console.log("Something went right");
+                $('.alert').addClass('alert-success');
+                $('#result').html(data.message);
+
+            }
+
+
         })
     }
 

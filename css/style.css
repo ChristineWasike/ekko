@@ -1091,5 +1091,5 @@ a {
 
 /*My CSS*/
 .alert, #loader{
-    /*display: none;*/
+    display: none;
 }
