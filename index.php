@@ -19,8 +19,31 @@
 
 
     <link rel="stylesheet" href="css/aos.css">
+    <style>
+        #snackbar {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+        }
 
+        #snackbar.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+    </style>
     <link rel="stylesheet" href="css/style.css">
+
 
 </head>
 
@@ -75,9 +98,33 @@
                 <div class="icons">
                     <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
                     <a href="#" class="icons-btn d-inline-block"><span class="icon-heart-o"></span></a>
-                    <a href="cart.html" class="icons-btn d-inline-block bag">
+
+                    <?php
+                    require_once('includes/DbConnect.php');
+                    $db = new DbConnect();
+                    $connection = $db->connection();
+                    # Creating a section that fetches the customer's id upon logging in and using it during their session
+                    # In the where a user clicks on the artifact, art piece or music product, they are prompted to
+                    # log in first before they can proceed to add the item to cart.
+                    require 'classes/Customer.php';
+                    $objCustomer = new Customer($connection);
+                    $objCustomer->setEmail('random.user@gmail.com');
+                    # Getting the user email address to help start the session
+                    $customer = $objCustomer->getCustomerByEmail();
+                    session_start();
+                    $_SESSION['customer_id'] = $customer['id'];
+
+                    # Making clickable shopping bag and number tag dynamic
+                    require 'classes/Cart.php';
+                    $objCart = new Cart();
+                    $objCart->setCustomerId($customer['id']);
+                    $cartItems = $objCart->getAllCartItems();
+
+                    ?>
+                    <!--                    Add to cart functionality being implemented here, look out.-->
+                    <a href="cart.php" class="icons-btn d-inline-block bag">
                         <span class="icon-shopping-bag"></span>
-                        <span class="number">2</span>
+                        <span class="number" id="item_count"><?php echo count($cartItems); ?></span>
                     </a>
                     <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
                                 class="icon-menu"></span></a>
@@ -103,9 +150,10 @@
                         </p>
                     </div>
                 </div>
-                <!--                <div class="col-lg-7 align-self-end text-center text-lg-right">-->
-                <!--                    <img src="images/new/art_piece2.png" alt="Image" class="img-fluid img-1">-->
-                <!--                </div>-->
+                <div class="col-lg-7 align-self-end text-center text-lg-right"
+                     style="margin-bottom: 15%;">
+                    <img src="images/new/woman.png" alt="Image" class="img-fluid img-1">
+                </div>
 
             </div>
         </div>
@@ -115,23 +163,9 @@
 
     <div class="products-wrap border-top-0">
         <div class="container-fluid" id="items">
-            <?php
-            require_once('includes/DbConnect.php');
-            $db = new DbConnect();
-            $connection = $db->connection();
-            # Creating a section that fetches the customer's id upon logging in and using it during their session
-            # In the where a user clicks on the artifact, art piece or music product, they are prompted to
-            # log in first before they can proceed to add the item to cart.
-            require 'classes/Customer.php';
-            $objCustomer = new Customer($connection);
-            $objCustomer->setEmail('random.user@gmail.com');
-            # Getting the user email address to help start the session
-            $customer = $objCustomer->getCustomerByEmail();
-            session_start();
-            $_SESSION['customer_id'] = $customer['id'];
-            ?>
+
             <div class="row" style="text-align: center;">
-                <div class="alert alert-dismissible" role="alert" style="display: flex">
+                <div class="alert alert-dismissible" role="alert" style="display: flex; display: none;">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         x
                     </button>
@@ -155,17 +189,35 @@
 
                     ?>
                     <div class="col-6 col-md-6 col-lg-4">
-                        <a href="#items" class="item" onclick="addToCart(<?= $item['id']; ?>)">
+                        <a href="#items" class="item">
                             <?php if ($item['on_sale'] == 1) {
                                 echo '<span class="tag">Sale</span>';
                             } ?>
                             <img src="images/edit/<?= $item['image']; ?>" alt="Image" class="img-fluid">
                             <div class="item-info">
-                                <h3 style="color: whitesmoke"><?= $item['name']; ?> </h3>
-                                <strong class="price" style="color: navajowhite">$<?= $item['price']; ?></strong>
-                                <span class="collection d-block" style="color: antiquewhite">
+                                <div class="col-md-12">
+                                    <h3 style="color: whitesmoke"><?= $item['name']; ?> </h3>
+                                    <strong class="price" style="color: navajowhite">$<?= $item['price']; ?></strong>
+                                    <span class="collection d-block" style="color: antiquewhite">
                                         <?= substr($item['description'], 0, 40) . '...'; ?>
-                                    </span>
+                                </span>
+                                </div>
+                                <div class="col-md-12">
+
+                                    <?php
+                                    # Disabling the add to cart functionality in case the item has already been added
+                                    # to cart.
+                                    $disable_button = "";
+                                    if (array_search($item['id'], array_column($cartItems, 'item_id')) !== false) {
+                                        $disable_button = "disabled";
+                                    }
+                                    ?>
+                                    <button id="cart_btn_<?= $item['id']; ?>" <?php echo $disable_button ?>
+                                            class="btn btn-primary" style="height: 75%;"
+                                            onclick="addToCart(<?= $item['id']; ?>, this.id)">
+                                        <span class="icon-shopping-bag"></span>
+                                    </button>
+                                </div>
                             </div>
                         </a>
                     </div>
@@ -180,13 +232,18 @@
             <div class="row align-items-center">
                 <div class="col-lg-4 ml-auto order-lg-2 align-self-start">
                     <div class="site-block-cover-content">
-                        <h2 class="sub-title">#New Summer Collection 2019</h2>
-                        <h1>Jacket</h1>
-                        <p><a href="#" class="btn btn-black rounded-0">Shop Now</a></p>
+                        <h2 class="sub-title">#New Summer Collection
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>
+                        </h2>
+                        <h1>Art Piece</h1>
+                        <p><a href="cart.php" class="btn btn-black rounded-0" onclick="snackBar()">Go to Cart</a></p>
+                        <div id="snackbar">Some text some message..</div>
                     </div>
                 </div>
                 <div class="col-lg-8 order-1 align-self-end">
-                    <img src="images/model_woman_1.png" alt="Image" class="img-fluid">
+                    <img src="images/new/art_piece11.jpg" alt="Image" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -391,7 +448,7 @@
 <script src="js/main.js"></script>
 
 <script type="text/javascript">
-    function addToCart(item_id) {
+    function addToCart(item_id, cart_btn_id) {
         $('#loader').show();
         $.ajax({
             url: "action.php",
@@ -411,11 +468,21 @@
                 console.log("Something went right");
                 $('.alert').addClass('alert-success');
                 $('#result').html(data.message);
-
+                // Disabling the add to cart button once successfully added to cart
+                $('#' + cart_btn_id).prop('disabled', true);
+                $('#item_count').text(parseInt($('#item_count').text()) + 1)
             }
 
 
         })
+    }
+
+    function snackBar() {
+        let x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function () {
+            x.className = x.className.replace("show", "");
+        }, 3000);
     }
 </script>
 

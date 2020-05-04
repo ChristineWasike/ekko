@@ -115,4 +115,13 @@ class Cart {
     public function removeAllItems() {
 
     }
+
+    public function getAllCartItems() {
+        $query = "SELECT c.*, a.price, a.description, a.image FROM cart c JOIN all_items a on c.item_id = a.id " .
+            "WHERE customer_id = :customer_id";
+        $statement = $this->dbConnection->prepare($query);
+        $statement->bindParam('customer_id', $this->customer_id);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

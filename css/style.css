@@ -1,4 +1,6 @@
 /* Base */
+
+
 body {
   line-height: 1.7;
   color: #8c92a0;
@@ -1089,7 +1091,3 @@ a {
 .border {
   border: 1px solid #eee !important; }
 
-/*My CSS*/
-.alert, #loader{
-    display: none;
-}
