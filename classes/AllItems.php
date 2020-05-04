@@ -83,14 +83,13 @@ class AllItems {
 
     function setOnSale($on_sale) {
         $this->on_sale = $on_sale;
+        return $this;
     }
 
 
-    public function __construct() {
+    public function __construct($connection) {
         // Create a connection instance
-        require_once('includes/DbConnect.php');
-        $db = new DbConnect();
-        $this->dbConnection = $db->connection();
+        $this->dbConnection = $connection();
     }
 
     public function getAllItems() {

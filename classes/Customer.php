@@ -56,11 +56,9 @@ class Customer {
         return $this;
     }
 
-    public function __construct() {
+    public function __construct($connection) {
         // Create a connection instance
-        require_once('includes/DbConnect.php');
-        $db = new DbConnect();
-        $this->dbConnection = $db->connection();
+        $this->dbConnection = $connection;
     }
 
     public function getCustomerByEmail() {

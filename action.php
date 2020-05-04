@@ -2,9 +2,6 @@
 // Check that an action has been set
 if (isset($_POST['action'])) {
     session_start();
-    require_once ('includes/DbConnect.php');
-    $db = new DbConnect();
-    $connection = $db->connection();
     require "classes/AllItems.php";
     require "classes/Cart.php";
 
@@ -16,7 +13,8 @@ if (isset($_POST['action'])) {
             $item = $objAllItems->getItemById();
 
             # Creating an instance of the cart object
-            $objCart = new Cart($connection);
+            $objCart = new Cart();
+            echo $_SESSION['customer_id'];
             $objCart->setCustomerId($_SESSION['customer_id']);
             $objCart->setItemId($item['id']);
             $objCart->setItemName($item['name']);

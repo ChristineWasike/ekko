@@ -76,9 +76,11 @@ class Cart {
         return $this;
     }
 
-    public function __construct($connection) {
+    public function __construct() {
         // Create a connection instance
-        $this->dbConnection = $connection;
+        require_once('includes/DbConnect.php');
+        $db = new DbConnect();
+        $this->dbConnection = $db->connection();
     }
 
     public function addItem() {

@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+session_start();
+?>
 <head>
     <title>Ekko &mdash; Creatives E-commerce</title>
     <meta charset="utf-8">
@@ -20,6 +23,7 @@
     <link rel="stylesheet" href="css/style.css">
 
 </head>
+
 <body>
 
 <div class="site-wrap">
@@ -112,16 +116,21 @@
     <div class="products-wrap border-top-0">
         <div class="container-fluid" id="items">
             <?php
+            require_once('includes/DbConnect.php');
+            $db = new DbConnect();
+            $connection = $db->connection();
             # Creating a section that fetches the customer's id upon logging in and using it during their session
             # In the where a user clicks on the artifact, art piece or music product, they are prompted to
             # log in first before they can proceed to add the item to cart.
             require "classes/Customer.php";
-            $objCustomer = new Customer();
-            $objCustomer->setEmail('random.user@gmail.com');
-            # Getting the user email address to help start the session
-            $customer = $objCustomer->getCustomerByEmail();
-            session_start();
-            $_SESSION['`customer_id`'] = $customer['id'];
+//            $objCustomer = new Customer($connection);
+//            $objCustomer->setEmail('random.user@gmail.com');
+//            # Getting the user email address to help start the session
+//            $customer = $objCustomer->getCustomerByEmail();
+//
+//            $_SESSION['customer_id'] = $customer['id'];
+//            echo $_SESSION['customer_id']
+            disconnectFromDatabase();
             ?>
             <div class="row" style="text-align: center;">
                 <div class="alert alert-dismissible" role="alert" style="display: flex">
@@ -130,8 +139,8 @@
                     </button>
                     <div id="result">
                         <div style="text-align: center;">
-                            <img src="https://snoopgame.com/wp-content/uploads/2019/08/dots.gif"
-                                 id="loader" alt="loader gif" style="height: 50%; width: 50%;  display: none;">
+                            <img src="https://snoopgame.com/wp-content/uploads/2019/08/dots.gif" id="loader"
+                                 alt="loader gif" style="height: 50%; width: 50%; display: none;">
                         </div>
                     </div>
                 </div>
@@ -140,7 +149,7 @@
                 <?php
                 require "classes/AllItems.php";
 
-                $objAllItems = new AllItems();
+                $objAllItems = new AllItems($connection);
                 $allItems = $objAllItems->getAllItems();
 
                 foreach ($allItems as $key => $item) {
@@ -157,8 +166,8 @@
                                 <h3 style="color: whitesmoke"><?= $item['name']; ?> </h3>
                                 <strong class="price" style="color: navajowhite">$<?= $item['price']; ?></strong>
                                 <span class="collection d-block" style="color: antiquewhite">
-                                    <?= substr($item['description'], 0, 40) . '...'; ?>
-                                </span>
+                                        <?= substr($item['description'], 0, 40) . '...'; ?>
+                                    </span>
                             </div>
                         </a>
                     </div>
@@ -359,7 +368,9 @@
                 <div class="col-md-12">
                     <p>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                        Copyright &copy;<script>
+                            document.write(new Date().getFullYear());
+                        </script>
                         All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i>
                         by <a href="https://colorlib.com" target="_blank" class="text-primary">Colorlib</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -383,31 +394,33 @@
 
 <script type="text/javascript">
     function addToCart(item_id) {
-        $('#loader').show();
+        // $('#loader').show();
         $.ajax({
             url: "action.php",
             data: "item_id=" + item_id + "&action=add",
             method: "post"
         }).done(function (response) {
-            let data = JSON.parse(response);
-            $('#loader').hide();
+            // let data = JSON.parse(response);
+            $('#loader').show();
             $('.alert').show();
-            if (data.status === 0) {
-                console.log("Something went wrong");
-                $('.alert').addClass('alert-danger');
-                $('#result').html(data.message);
-            } else {
-                console.log("Something went right");
-                $('.alert').addClass('alert-success');
-                $('#result').html(data.message);
+            $('#result').html(response)
 
-            }
+            // if (data.status === 0) {
+            //     console.log("Something went wrong");
+            //     $('.alert').addClass('alert-danger');
+            //     $('#result').html(data.message);
+            // } else {
+            //     console.log("Something went right");
+            //     $('.alert').addClass('alert-success');
+            //     $('#result').html(data.message);
+            //
+            // }
 
 
         })
     }
-
 </script>
 
 </body>
+
 </html>
