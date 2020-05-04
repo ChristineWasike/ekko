@@ -1,6 +1,4 @@
 <?php
-include("includes/DbConnect.php");
-
 class AllItems {
     private $id;
     private $name;
@@ -12,84 +10,44 @@ class AllItems {
     private $on_sale;
     private $dbConnection;
 
-    function getId() {
-        return $this->id;
-    }
+    function getId() {return $this->id;}
 
-    function setId($id) {
-        $this->id = $id;
-        return $this;
-    }
+    function setId($id) {$this->id = $id;return $this;}
 
-    function getName() {
-        return $this->name;
-    }
+    function getName() {return $this->name;}
 
-    function setName($name) {
-        $this->name = $name;
-        return $this;
-    }
+    function setName($name) {$this->name = $name;return $this;}
 
-    function getDescription() {
-        return $this->description;
-    }
+    function getDescription() {return $this->description;}
 
-    function setDescription($description) {
-        $this->description = $description;
-        return $this;
-    }
+    function setDescription($description) {$this->description = $description;return $this;}
 
-    function getPrice() {
-        return $this->price;
-    }
+    function getPrice() {return $this->price;}
 
-    function setPrice($price) {
-        $this->price = $price;
-        return $this;
-    }
+    function setPrice($price) {$this->price = $price;return $this;}
 
-    function getImage() {
-        return $this->image;
-    }
+    function getImage() {return $this->image;}
 
 
-    function setImage($image) {
-        $this->image = $image;
-        return $this;
-    }
+    function setImage($image) {$this->image = $image;return $this;}
 
-    function getMerchantId() {
-        return $this->merchant_id;
-    }
+    function getMerchantId() {return $this->merchant_id;}
 
-    function setMerchantId($merchant_id) {
-        $this->merchant_id = $merchant_id;
-        return $this;
-    }
+    function setMerchantId($merchant_id) {$this->merchant_id = $merchant_id;return $this;}
 
-    function getMerchantName() {
-        return $this->merchant_name;
-    }
+    function getMerchantName() {return $this->merchant_name;}
 
-    function setMerchantName($merchant_name) {
-        $this->merchant_name = $merchant_name;
-        return $this;
-    }
+    function setMerchantName($merchant_name) {$this->merchant_name = $merchant_name;return $this;}
 
 
-    function getOnSale() {
-        return $this->on_sale;
-    }
+    function getOnSale() {return $this->on_sale;}
 
-    function setOnSale($on_sale) {
-        $this->on_sale = $on_sale;
-        return $this;
-    }
+    function setOnSale($on_sale) {$this->on_sale = $on_sale; return $this;}
 
 
     public function __construct($connection) {
         // Create a connection instance
-        $this->dbConnection = $connection();
+        $this->dbConnection = $connection;
     }
 
     public function getAllItems() {

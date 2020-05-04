@@ -12,8 +12,4 @@ class DbConnect {
             echo 'Database Error: ' . $exception->getMessage();
         }
     }
-
-    function disconnectFromDatabase($mysqli) {
-        $mysqli->close();
-    }
 }

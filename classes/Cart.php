@@ -1,5 +1,4 @@
 <?php
-include("includes/connect_to_db.php");
 
 class Cart {
     private $id;

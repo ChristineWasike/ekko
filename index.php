@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-session_start();
+
 ?>
 <head>
     <title>Ekko &mdash; Creatives E-commerce</title>
@@ -122,15 +122,13 @@ session_start();
             # Creating a section that fetches the customer's id upon logging in and using it during their session
             # In the where a user clicks on the artifact, art piece or music product, they are prompted to
             # log in first before they can proceed to add the item to cart.
-            require "classes/Customer.php";
-//            $objCustomer = new Customer($connection);
-//            $objCustomer->setEmail('random.user@gmail.com');
-//            # Getting the user email address to help start the session
-//            $customer = $objCustomer->getCustomerByEmail();
-//
-//            $_SESSION['customer_id'] = $customer['id'];
-//            echo $_SESSION['customer_id']
-            disconnectFromDatabase();
+            require 'classes/Customer.php';
+            $objCustomer = new Customer($connection);
+            $objCustomer->setEmail('random.user@gmail.com');
+            # Getting the user email address to help start the session
+            $customer = $objCustomer->getCustomerByEmail();
+            session_start();
+            $_SESSION['customer_id'] = $customer['id'];
             ?>
             <div class="row" style="text-align: center;">
                 <div class="alert alert-dismissible" role="alert" style="display: flex">
@@ -147,7 +145,7 @@ session_start();
             </div>
             <div class="row no-gutters products">
                 <?php
-                require "classes/AllItems.php";
+                require 'classes/AllItems.php';
 
                 $objAllItems = new AllItems($connection);
                 $allItems = $objAllItems->getAllItems();
@@ -394,27 +392,27 @@ session_start();
 
 <script type="text/javascript">
     function addToCart(item_id) {
-        // $('#loader').show();
+        $('#loader').show();
         $.ajax({
             url: "action.php",
             data: "item_id=" + item_id + "&action=add",
             method: "post"
         }).done(function (response) {
-            // let data = JSON.parse(response);
-            $('#loader').show();
+            console.log(response)
+            var data = JSON.parse(response);
+            $('#loader').hide();
             $('.alert').show();
-            $('#result').html(response)
 
-            // if (data.status === 0) {
-            //     console.log("Something went wrong");
-            //     $('.alert').addClass('alert-danger');
-            //     $('#result').html(data.message);
-            // } else {
-            //     console.log("Something went right");
-            //     $('.alert').addClass('alert-success');
-            //     $('#result').html(data.message);
-            //
-            // }
+            if (data.status === 0) {
+                console.log("Something went wrong");
+                $('.alert').addClass('alert-danger');
+                $('#result').html(data.message);
+            } else {
+                console.log("Something went right");
+                $('.alert').addClass('alert-success');
+                $('#result').html(data.message);
+
+            }
 
 
         })
