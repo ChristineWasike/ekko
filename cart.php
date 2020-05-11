@@ -119,8 +119,11 @@ session_start();
                             </thead>
                             <tbody>
                             <?php
-                            foreach ($cartItems as $key => $cartItem) {
+                            # Calculating subtotals and total amount
+                            $sub_total = 0;
 
+                            foreach ($cartItems as $key => $cartItem) {
+                                $sub_total += $cartItem['total_amount']
 
                                 ?>
                                 <tr>
@@ -139,7 +142,10 @@ session_start();
                                                     &minus;
                                                 </button>
                                             </div>
-                                            <input type="text" class="form-control text-center" value="<?= $cartItem['quantity']; ?>" placeholder=""
+                                            <input onchange="updateCart(<?= $cartItem['item_id']; ?>, <?= $cartItem['id']; ?>)"
+                                                   type="text"
+                                                   class="form-control text-center" id="item_<?= $cartItem['id'] ?>"
+                                                   value="<?= $cartItem['quantity']; ?>" placeholder=""
                                                    aria-label="Example text with button addon"
                                                    aria-describedby="button-addon1">
                                             <div class="input-group-append">
@@ -150,7 +156,7 @@ session_start();
                                         </div>
 
                                     </td>
-                                    <td>$<?= $cartItem['total_amount'] ; ?></td>
+                                    <td>$<?= $cartItem['total_amount']; ?></td>
                                     <td><a href="#" class="btn btn-primary height-auto btn-sm">X</a></td>
                                 </tr>
                             <?php } ?>
@@ -186,6 +192,7 @@ session_start();
                 <div class="col-md-6 pl-5">
                     <div class="row justify-content-end">
                         <div class="col-md-7">
+
                             <div class="row">
                                 <div class="col-md-12 text-right border-bottom mb-5">
                                     <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
@@ -196,7 +203,7 @@ session_start();
                                     <span class="text-black">Subtotal</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong class="text-black">$230.00</strong>
+                                    <strong class="text-black">$<?= number_format($sub_total, 2) ?></strong>
                                 </div>
                             </div>
                             <div class="row mb-5">
@@ -204,7 +211,7 @@ session_start();
                                     <span class="text-black">Total</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong class="text-black">$230.00</strong>
+                                    <strong class="text-black">$<?= number_format($sub_total, 2) ?></strong>
                                 </div>
                             </div>
 
@@ -311,5 +318,16 @@ session_start();
 
 <script src="js/main.js"></script>
 
+<script type="text/javascript">
+    console.log("Something should be happening")
+    console.log($('#item_' + 1).val())
+
+    function updateCart(item_id, cart_id) {
+        console.log($('#item_' + cart_id).val())
+
+    }
+
+
+</script>
 </body>
 </html>
