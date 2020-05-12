@@ -97,6 +97,19 @@ session_start();
 
     <div class="site-section">
         <div class="container">
+            <div class="row" style="text-align: center;">
+                <div class="alert alert-dismissible" role="alert" style="display: flex; display: none;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        x
+                    </button>
+                    <div id="result">
+                        <div style="text-align: center;">
+                            <img src="https://snoopgame.com/wp-content/uploads/2019/08/dots.gif" id="loader"
+                                 alt="loader gif" style="height: 50%; width: 50%; display: none;">
+                        </div>
+                    </div>
+                </div>
+            </div>
             <?php
             require 'classes/Cart.php';
             $objCart = new Cart();
@@ -123,7 +136,8 @@ session_start();
                             $sub_total = 0;
 
                             foreach ($cartItems as $key => $cartItem) {
-                                $sub_total += $cartItem['total_amount']
+                                $sub_total += $cartItem['total_amount'];
+                                $quantity += $cartItem['quantity'];
 
                                 ?>
                                 <tr>
@@ -138,26 +152,27 @@ session_start();
                                     <td>
                                         <div class="input-group mb-3" style="max-width: 120px;">
                                             <div class="input-group-prepend">
-                                                <button class="btn btn-outline-primary js-btn-minus" type="button">
+                                                <button class="btn btn-outline-primary js-btn-minus" type="button"
+                                                        onclick="updateCart(<?= $cartItem['item_id']; ?>, <?= $cartItem['id']; ?>)">
                                                     &minus;
                                                 </button>
                                             </div>
-                                            <input onchange="updateCart(<?= $cartItem['item_id']; ?>, <?= $cartItem['id']; ?>)"
-                                                   type="text"
-                                                   class="form-control text-center" id="item_<?= $cartItem['id'] ?>"
+                                            <input type="text"
+                                                   class="form-control text-center" id="item_<?= $cartItem['id']; ?>"
                                                    value="<?= $cartItem['quantity']; ?>" placeholder=""
                                                    aria-label="Example text with button addon"
                                                    aria-describedby="button-addon1">
                                             <div class="input-group-append">
-                                                <button class="btn btn-outline-primary js-btn-plus" type="button">
+                                                <button class="btn btn-outline-primary js-btn-plus" type="button"
+                                                        onclick="updateCart(<?= $cartItem['item_id']; ?>, <?= $cartItem['id']; ?>)">
                                                     &plus;
                                                 </button>
                                             </div>
                                         </div>
 
                                     </td>
-                                    <td>$<?= $cartItem['total_amount']; ?></td>
-                                    <td><a href="#" class="btn btn-primary height-auto btn-sm">X</a></td>
+                                    <td id="total_price_<?= $cartItem['id']; ?>">$<?= $cartItem['total_amount']; ?></td>
+                                    <td><a href="#" class="btn btn-primary height-auto btn-sm" onclick="removeItem()">X</a></td>
                                 </tr>
                             <?php } ?>
                             </tbody>
@@ -203,7 +218,8 @@ session_start();
                                     <span class="text-black">Subtotal</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong class="text-black">$<?= number_format($sub_total, 2) ?></strong>
+                                    <strong class="text-black"
+                                            id="sub_total">$<?= number_format($sub_total, 2) ?></strong>
                                 </div>
                             </div>
                             <div class="row mb-5">
@@ -211,7 +227,8 @@ session_start();
                                     <span class="text-black">Total</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong class="text-black">$<?= number_format($sub_total, 2) ?></strong>
+                                    <strong class="text-black"
+                                            id="final_total">$<?= number_format($sub_total, 2) ?></strong>
                                 </div>
                             </div>
 
@@ -319,12 +336,29 @@ session_start();
 <script src="js/main.js"></script>
 
 <script type="text/javascript">
-    console.log("Something should be happening")
-    console.log($('#item_' + 1).val())
-
     function updateCart(item_id, cart_id) {
-        console.log($('#item_' + cart_id).val())
-
+        console.log(parseInt($('#item_' + cart_id).val()) + 1);
+        let item_quantity = parseInt($('#item_' + cart_id).val()) + 1
+        $('#loader').show();
+        $.ajax({
+            url: "action.php",
+            data: "item_id=" + item_id + "&action=update&quantity=" + item_quantity,
+            method: "post"
+        }).done(function (response) {
+            let data = JSON.parse(response);
+            $('#loader').hide();
+            $('.alert').show();
+            if (data.status === 0) {
+                $('.alert').addClass('alert-danger');
+                $('#result').html(data.message);
+            } else {
+                $('.alert').addClass('alert-success');
+                $('#result').html(data.message);
+                $('#total_price_' + cart_id).text(data.data.total_price);
+                $('#sub_total').text(data.data.sub_total);
+                $('#final_total').text(data.data.final_price);
+            }
+        })
     }
 
 

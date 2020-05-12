@@ -105,6 +105,22 @@ class Cart {
     }
 
     public function updateItem() {
+        $query = "UPDATE `cart` SET `quantity` = :quantity, `total_amount` = :total_amount WHERE 
+                    `customer_id` = :customer_id AND `item_id` = :item_id";
+        $statement = $this->dbConnection->prepare($query);
+        $statement->bindParam(':customer_id', $this->customer_id);
+        $statement->bindParam(':item_id', $this->item_id);
+        $statement->bindParam(':quantity', $this->quantity);
+        $statement->bindParam(':total_amount', $this->total_amount);
+        try {
+            if ($statement->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception $exception) {
+            echo $exception->getMessage();
+        }
 
     }
 
