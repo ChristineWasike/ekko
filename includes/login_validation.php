@@ -21,7 +21,8 @@ $validate = new Validation();
 $password_and_username_contained = $validate->verifyUsername($user_name);
 echo $password_and_username_contained;
 
-if ($password_and_username_contained) {
+# Made it not true to negate it
+if (!$password_and_username_contained) {
     $action_page = "../index.php";
 } else {
     $message = "Sorry, your username or password are incorrect. Please try again";

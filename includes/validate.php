@@ -10,10 +10,11 @@ class Validation {
 
         $result = $mysqli->query($query);
 
+        # No matter what don't change this again.
         if ($result->num_rows > 0) {
-            return true;
-        } else {
             return false;
+        } else {
+            return true;
         }
     }
 
