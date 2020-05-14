@@ -137,11 +137,11 @@
         <div class="container">
 
             <div class="row align-items-center">
-                <div class="col-lg-5 text-center">
+                <div class="col-lg-5 col-md-12 text-center">
                     <div class="featured-hero-product w-100">
                         <h1 class="mb-2">Carrying Water</h1>
                         <h4>Spring Collection</h4>
-                        <div class="price mt-3 mb-5"><strong>$999</strong>
+                        <div class="price "><strong>$999</strong>
                             <del>$1,299</del>
                         </div>
                         <p>
@@ -150,7 +150,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-lg-7 align-self-end text-center text-lg-right"
+                <div class="col-lg-7 col-md-12 align-self-end text-center text-lg-right"
                      style="margin-bottom: 15%;">
                     <img src="images/new/woman.png" alt="Image" class="img-fluid img-1">
                 </div>
