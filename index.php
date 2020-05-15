@@ -139,13 +139,13 @@
                 <div class="col-lg-5 col-md-12 text-center">
                     <div class="featured-hero-product w-100">
                         <h1 class="mb-2">Carrying Water</h1>
-                        <h4>Spring Collection</h4>
+                        <h4>New Collection</h4>
                         <div class="price "><strong>$999</strong>
                             <del>$1,299</del>
                         </div>
                         <p>
-                            <a href="#" class="btn btn-outline-primary rounded-0">Shop Now</a>
-                            <a href="#" class="btn btn-primary rounded-0">Shop Now</a>
+                            <a href="#items" class="btn btn-outline-primary rounded-0">View More</a>
+                            <a href="#items" class="btn btn-primary rounded-0">Shop Now</a>
                         </p>
                     </div>
                 </div>
@@ -343,13 +343,13 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 ml-auto order-lg-2 align-self-start">
                     <div class="site-block-cover-content">
-                        <h2 class="sub-title">#New Summer Collection 2019</h2>
-                        <h1>New Denim Coat</h1>
+                        <h2 class="sub-title">#New Quarantine Collection 2020</h2>
+                        <h1>Burst Of Color</h1>
                         <p><a href="#" class="btn btn-black rounded-0">Shop Now</a></p>
                     </div>
                 </div>
                 <div class="col-lg-6 order-1 align-self-end">
-                    <img src="images/model_5.png" alt="Image" class="img-fluid">
+                    <img src="images/carrying_water.jpg" alt="Image" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -362,8 +362,12 @@
 
                     <div class="block-7">
                         <h3 class="footer-heading mb-4">About Us</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quae reiciendis distinctio
-                            voluptates sed dolorum excepturi iure eaque, aut unde.</p>
+                        <p>
+                            Ekko is an e-commerce platform aimed at making e-commerce shopping more social.
+                            Here, we promote local talent by creating an environment for them to showcase some of their
+                            art pieces and sell them. Also, the name is Ekko derived from e-commerce, as in
+                            Ekko-mmerce!
+                        </p>
                     </div>
                     <div class="block-7">
                         <form action="#" method="post">
@@ -409,9 +413,11 @@
                     <div class="block-5 mb-5">
                         <h3 class="footer-heading mb-4">Contact Info</h3>
                         <ul class="list-unstyled">
-                            <li class="address">203 Fake St. Mountain View, San Francisco, California, USA</li>
-                            <li class="phone"><a href="tel://23923929210">+2 392 3929 210</a></li>
-                            <li class="email">emailaddress@domain.com</li>
+                            <li class="address">African Leadership University Kigali Heights, 2nd floor,KG 7 Ave,
+                                Kigali, Rwanda
+                            </li>
+                            <li class="phone"><a href="tel://23923929210">+250 789 448 340</a></li>
+                            <li class="email">christinewasike22@gmail.com</li>
                         </ul>
                     </div>
 

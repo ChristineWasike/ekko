@@ -4,13 +4,13 @@ session_start();
 ?>
 <html lang="en">
 <head>
-    <title>Dealers &mdash; Colorlib e-Commerce Template</title>
+    <title>Ekko</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,700" rel="stylesheet">
     <link rel="stylesheet" href="fonts/icomoon/style.css">
-
+    <link rel="icon" href="images/logo/logo_transparent.png" type="image/png">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
     <link rel="stylesheet" href="css/jquery-ui.css">
@@ -43,7 +43,7 @@ session_start();
             <div class="d-flex align-items-center justify-content-between">
                 <div class="logo">
                     <div class="site-logo">
-                        <a href="index.php" class="js-logo-clone">Dealers</a>
+                        <a href="index.php" class="js-logo-clone">Ekko</a>
                     </div>
                 </div>
                 <div class="main-nav d-none d-lg-block">
@@ -172,7 +172,8 @@ session_start();
 
                                     </td>
                                     <td id="total_price_<?= $cartItem['id']; ?>">$<?= $cartItem['total_amount']; ?></td>
-                                    <td><a href="#" class="btn btn-primary height-auto btn-sm" onclick="removeItem()">X</a></td>
+                                    <td><a href="#" class="btn btn-primary height-auto btn-sm"
+                                           onclick="removeItem()">X</a></td>
                                 </tr>
                             <?php } ?>
                             </tbody>
@@ -188,7 +189,9 @@ session_start();
                             <button class="btn btn-primary btn-sm btn-block">Update Cart</button>
                         </div>
                         <div class="col-md-6">
-                            <button class="btn btn-outline-primary btn-sm btn-block">Continue Shopping</button>
+                            <a href="index.php">
+                                <button class="btn btn-outline-primary btn-sm btn-block">Continue Shopping</button>
+                            </a>
                         </div>
                     </div>
                     <div class="row">
