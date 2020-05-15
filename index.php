@@ -273,7 +273,7 @@
                         <div class="product">
                             <a href="#" class="item">
                                 <span class="tag">Sale</span>
-                                <img src="images/product_2.jpg" alt="Image" class="img-fluid">
+                                <img src="images/new/download.jpeg" alt="Image" class="img-fluid">
                                 <div class="item-info">
                                     <h3>Marc Jacobs Bag</h3>
                                     <span class="collection d-block">Summer Collection</span>
@@ -286,7 +286,7 @@
 
                         <div class="product">
                             <a href="#" class="item">
-                                <img src="images/product_3.jpg" alt="Image" class="img-fluid">
+                                <img src="images/new/art_piece_14.jpg" alt="Image" class="img-fluid">
                                 <div class="item-info">
                                     <h3>The Belt</h3>
                                     <span class="collection d-block">Summer Collection</span>
@@ -297,7 +297,7 @@
 
                         <div class="product">
                             <a href="#" class="item">
-                                <img src="images/product_1.jpg" alt="Image" class="img-fluid">
+                                <img src="images/edit/art_edit_6.jpg" alt="Image" class="img-fluid">
                                 <div class="item-info">
                                     <h3>The Shoe</h3>
                                     <span class="collection d-block">Summer Collection</span>
@@ -309,7 +309,7 @@
                         <div class="product">
                             <a href="#" class="item">
                                 <span class="tag">Sale</span>
-                                <img src="images/product_2.jpg" alt="Image" class="img-fluid">
+                                <img src="images/new/download.jpeg" alt="Image" class="img-fluid">
                                 <div class="item-info">
                                     <h3>Marc Jacobs Bag</h3>
                                     <span class="collection d-block">Summer Collection</span>
@@ -322,7 +322,7 @@
 
                         <div class="product">
                             <a href="#" class="item">
-                                <img src="images/product_3.jpg" alt="Image" class="img-fluid">
+                                <img src="images/new/art_piece_14.jpg" alt="Image" class="img-fluid">
                                 <div class="item-info">
                                     <h3>The Belt</h3>
                                     <span class="collection d-block">Summer Collection</span>
