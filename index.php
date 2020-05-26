@@ -89,8 +89,8 @@
                             </li>
 
                             <li><a href="shop.html">Shop</a></li>
-                            <li><a href="#">Catalogs</a></li>
                             <li><a href="contact.html">Contact</a></li>
+                            <li><a href="signup.php">Sign Up</a></li>
                         </ul>
                     </nav>
                 </div>
